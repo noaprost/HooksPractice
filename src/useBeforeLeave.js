@@ -8,8 +8,15 @@ const useBeforeLeave = (onBefore) => {
     return
   }
 
-  const handle = () => {
-    onBefore()
+  //여기서 전달받는 event는 MouseEvent
+  //clientY가 0보다 작은지 확인해줄 필요가 있음
+  //client가 위로 벗어난 경우에만 0보다 작은 값을 갖기 때문
+  //위로 벗어난 경우만 탭을 닫기 위한 행동으로 간주하고 onBefore을 실행시켜줌
+  const handle = (event) => {
+    const { clientY } = event
+    if (clientY <= 0) {
+      onBefore()
+    }
   }
 
   useEffect(() => {
