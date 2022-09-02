@@ -2,8 +2,14 @@
 
 import { useEffect } from 'react'
 
-//function을 인자로 받을 때는 꼭 이게 function이 맞는지 확인해야함
 const useBeforeLeave = (onBefore) => {
+  useEffect(() => {
+    //마우스가 document를 벗어났을때 handle이 실행됨
+    document.addEventListener('mouseleave', handle)
+    return () => document.removeEventListener('mouseleave', handle)
+  }, []) //이벤트가 중복 등록되는걸 막아줌
+
+  //function을 인자로 받을 때는 꼭 이게 function이 맞는지 확인해야함
   if (typeof onBefore !== 'function') {
     return
   }
@@ -18,12 +24,6 @@ const useBeforeLeave = (onBefore) => {
       onBefore()
     }
   }
-
-  useEffect(() => {
-    //마우스가 document를 벗어났을때 handle이 실행됨
-    document.addEventListener('mouseleave', handle)
-    return () => document.removeEventListener('mouseleave', handle)
-  }, []) //이벤트가 중복 등록되는걸 막아줌
 }
 
 const App = () => {
