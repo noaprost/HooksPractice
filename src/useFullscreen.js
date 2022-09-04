@@ -11,9 +11,12 @@ const useFullscreen = (callback) => {
     }
   }
   const exitFull = () => {
-    document.exitFullscreen()
-    if (callback && typeof callback === 'function') {
-      callback(false)
+    const checkFullScreen = document.fullscreenElement
+    if (checkFullScreen !== null) {
+      document.exitFullscreen()
+      if (callback && typeof callback === 'function') {
+        callback(false)
+      }
     }
   }
   return { element, triggerFull, exitFull }
