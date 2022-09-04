@@ -1,7 +1,7 @@
 //보통 웹사이트에서 쓰이는건데
 //유저가 떠나려 할때 "어디가 아직 저장 안했잖아!" 해주는 것
 
-//이건 한수가 아님
+//이건 함수가 아님
 //이건 Hooks를 요구하지 않음
 const usePreventLeave = () => {
   const listener = (event) => {
